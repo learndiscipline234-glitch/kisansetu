@@ -1,4 +1,4 @@
-﻿services:
+services:
   - type: web
     name: kisansetu-backend
     env: python
@@ -10,10 +10,13 @@
 
   - type: web
     name: kisansetu-frontend
-    env: node
+    runtime: static
     buildCommand: "cd frontend && npm install && npm run build"
     staticPublishPath: "frontend/dist"
     routes:
       - type: rewrite
         source: "/*"
         destination: "/index.html"
+    envVars:
+      - key: VITE_API_BASE_URL
+        value: "https://kisansetu-backend.onrender.com"
